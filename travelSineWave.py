@@ -6,7 +6,6 @@ from matplotlib import animation
 #Sine Wave function
 sineWave = lambda x,t,k,ohm,amp,phase : amp*np.cos(k*x - ohm*t + phase)
 
-
 #Animate a sinewave
 def sineAnimation(k,ohm,amp = 1):
     #Obtain physical quanities
@@ -102,14 +101,9 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
     nFrames = int(3*waveLen/(cProp*0.01*per))
 
     #Set up the frame
-    #fig = plt.subplots(2,1)
-    #fig  = plt.subplots(2,1)
-    #fig,(ax1,ax2) = plt.subplots(2,1)
     fig, axes = plt.subplots(2,1)
     line1, = axes[0].plot([], [], 'k-', lw=2)
     line2, = axes[1].plot([], [], 'r-', lw=2)
-    #fig = plt.figure(1)
-    #lines = []
 
     #Set up plot 1
     axes[0].set_xlim(0,4*waveLen)
@@ -142,7 +136,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
     #Animate the first plot
     def animate(frame):
         #Animate plot 1
-        t1 = frame*per*0.01
+        t1 = frame*per*0.01 
         x = np.linspace(0,4*(2*np.pi)/k,500)
         y1 = x*0
 
@@ -161,10 +155,11 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
         y2Arr = np.array([])
         t2Arr = np.array([])
 
-        #Regenerate previous frames (Computationally inefficnet (O(n^2)))
-        for i in range(frame):
+        #Regenerate previous frames 
+        for i in range(frame + 1):
             tVal = i*per*0.01
 
+            #Pulse condition
             if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
                 yVal = sineWave(x[249],tVal,k,ohm,amp,-np.pi/2)
             else:
@@ -175,14 +170,11 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
         
         line2.set_data(t2Arr,y2Arr)
 
+        #Check for timing bug
+        if (t2Arr[len(t2Arr) - 1] != t1):
+            print("!!The Plots are out of sync!!")
+
         return line1, line2, time_text
-
-    #Animate the second plot
-    # animArr = []
-    # for n in range(int(3*waveLen/cProp)):
-    #     animArr.append(plt.plot(n*0.01*per,sineWave(4*waveLen/(500-1)*249,n*0.01*per,k,ohm,amp,-np.pi/2)))
-
-
 
     #Animate wave
     anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(3*waveLen/(cProp*0.01*per)), interval = 45,blit = True)
