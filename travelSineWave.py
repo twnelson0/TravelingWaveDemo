@@ -107,7 +107,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
 
     #Set up plot 1
     axes[0].set_xlim(0,4*waveLen)
-    axes[0].plot(4*(2*np.pi)/k*249/500,0,'r*', lw = 1)
+    axes[0].plot(4*(2*np.pi)/k*249/499,0,'r*', lw = 1)
     axes[0].set_ylim(-(amp + 0.1*amp),(amp + 0.1*amp))
     axes[0].set_xlabel("x")
     axes[0].set_ylabel("y")
@@ -151,7 +151,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
         line1.set_data(x,y1)
         time_text.set_text('t = %.1f s' % t1)
 
-        #Aanimate plot 2
+        #Animate plot 2
         y2Arr = np.array([])
         t2Arr = np.array([])
 
