@@ -1,10 +1,8 @@
 #Import modules
 import numpy as np
+from MathMethods import *
 import matplotlib.pyplot as plt
 from matplotlib import animation
-
-#Sine Wave function
-sineWave = lambda x,t,k,ohm,amp,phase : amp*np.cos(k*x - ohm*t + phase)
 
 #Animate a sinewave
 def sineAnimation(k,ohm,amp = 1):

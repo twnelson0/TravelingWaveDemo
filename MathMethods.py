@@ -8,6 +8,7 @@ Idea is that this is the indicator fucntion/dirac measure for the set [a,b]
 """
 cDirac = lambda x,a,b: float(x >= a and x <= b)
 
+#Sine Wave function
 sineWave = lambda x,t,k,ohm,amp,phase : amp*np.cos(k*x - ohm*t + phase)
 
 """
