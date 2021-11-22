@@ -91,7 +91,7 @@ def sinePulseAnimation(k,ohm,amp = 1):
 
 
 #Animate pulse and t vs y plot at fixed point
-def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, epsVal = 0.01):
+def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01):
     #Obtain physical quanities
     per = 2*np.pi/ohm
     waveLen = np.pi*2/k
@@ -142,7 +142,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, epsVal = 0.01):
         for i in range(500):
             #Create Pulse
             if (x[i] >= 0 + cProp*t1 and x[i] <= (2*np.pi)/k + cProp*t1):
-                y1[i] = sineWave(x[i],t1,k,ohm,amp,-np.pi/2)
+                y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
             else:
                 continue
         
@@ -159,7 +159,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, epsVal = 0.01):
 
             #Pulse condition
             if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
-                yVal = sineWave(x[249],tVal,k,ohm,amp,-np.pi/2)
+                yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
             else:
                 yVal = 0
             
