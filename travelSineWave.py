@@ -93,12 +93,12 @@ def sinePulseAnimation(k,ohm,amp = 1):
 
 
 #Animate pulse and t vs y plot at fixed point
-def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
+def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, epsVal = 0.01):
     #Obtain physical quanities
     per = 2*np.pi/ohm
     waveLen = np.pi*2/k
     cProp = ohm/k
-    nFrames = int(3*waveLen/(cProp*0.01*per))
+    nFrames = int(3*waveLen/(cProp*epsVal*per))
 
     #Set up the frame
     fig, axes = plt.subplots(2,1)
@@ -136,7 +136,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
     #Animate the first plot
     def animate(frame):
         #Animate plot 1
-        t1 = frame*per*0.01 
+        t1 = frame*per*epsVal 
         x = np.linspace(0,4*(2*np.pi)/k,500)
         y1 = x*0
 
@@ -157,7 +157,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
 
         #Regenerate previous frames 
         for i in range(frame + 1):
-            tVal = i*per*0.01
+            tVal = i*per*epsVal
 
             #Pulse condition
             if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
@@ -177,7 +177,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1):
         return line1, line2, time_text
 
     #Animate wave
-    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(3*waveLen/(cProp*0.01*per)), interval = 45,blit = True)
+    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(3*waveLen/(cProp*epsVal*per)), interval = 45,blit = True)
     plt.show()
     #anim.save("TestAnim.avi",animation.FFMpegWriter(fps=10))
 
