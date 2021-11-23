@@ -105,7 +105,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
 
     #Set up plot 1
     axes[0].set_xlim(0,4*waveLen)
-    axes[0].plot(4*(2*np.pi)/k*249/499,0,'r*', lw = 1)
+    axes[0].plot(4*waveLen*249/499,0,'r*', lw = 1)
     axes[0].set_ylim(-(amp + 0.1*amp),(amp + 0.1*amp))
     axes[0].set_xlabel("x")
     axes[0].set_ylabel("y")
@@ -135,13 +135,13 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
     def animate(frame):
         #Animate plot 1
         t1 = frame*per*epsVal 
-        x = np.linspace(0,4*(2*np.pi)/k,500)
+        x = np.linspace(0,4*waveLen,500)
         y1 = x*0
 
         #Fill the amplitude array
         for i in range(500):
             #Create Pulse
-            if (x[i] >= 0 + cProp*t1 and x[i] <= (2*np.pi)/k + cProp*t1):
+            if (x[i] >= 0 + cProp*t1 and x[i] <= waveLen + cProp*t1):
                 y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
             else:
                 continue
@@ -195,7 +195,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
 
     #Set up plot 1
     axes[0].set_xlim(0,4*waveLen)
-    axes[0].plot(4*(2*np.pi)/k*249/499,0,'r*', lw = 1)
+    axes[0].plot(4*waveLen*249/499,0,'r*', lw = 1)
     axes[0].set_ylim(-(amp + 0.1*amp),(amp + 0.1*amp))
     axes[0].set_xlabel("x")
     axes[0].set_ylabel("y")
@@ -225,13 +225,12 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
     def animate(frame):
         #Animate plot 1
         t1 = frame*per*epsVal 
-        x = np.linspace(0,4*(2*np.pi)/k,500)
+        x = np.linspace(0,4*waveLen,500)
         y1 = x*0
 
         #Fill the amplitude array
         for i in range(500):
             #Create Pulse
-            #if (x[i] >= 0 + cProp*t1 and x[i] <= (2*np.pi)/k + cProp*t1):
             y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
         
         line1.set_data(x,y1)
@@ -269,7 +268,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
 
 #sineAnimation(1,1)
 #sinePulseAnimation(1,1)
-#pulseTimeAnimation(ohm = 2, epsVal = 8.8e-3)
+#pulseTimeAnimation(ohm = 2)
 planeWaveAnimation(ohm = 2)
 
 #if __namespace__ == "__main__"
