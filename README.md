@@ -18,3 +18,5 @@ By default `epsVal` is set to 0.01 (time steps are 1 percent of the period), the
 If you want to change what plot is produced you need to comment out line 188 of `travelSineWave.py` and replace it with a different function call.
 If you want to save the plot of the sine wave pulse and the time vs amplitude plot you need to modify the last 3 lines of the funciton `pulseTimeAnimation`.
 You can modify line 190 to change the format that the file is saved under and what the file is named.
+There is also a time vs amplitude and posistion vs ampitude animated plot for a plane wave. 
+It takes the same arguments as the pulse function.
