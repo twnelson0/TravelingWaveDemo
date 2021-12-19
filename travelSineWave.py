@@ -8,7 +8,7 @@ from matplotlib import animation
 def sineAnimation(k,ohm,amp = 1):
     #Obtain physical quanities
     per = 2*np.pi/ohm
-    waveLen = np.pi*2/k
+    waveLen = abs(np.pi*2/k)
 
     #Set up the frame
     fig = plt.figure()
@@ -47,7 +47,7 @@ def sineAnimation(k,ohm,amp = 1):
 def sinePulseAnimation(k,ohm,amp = 1):
     #Obtain physical quanities
     per = 2*np.pi/ohm
-    waveLen = np.pi*2/k
+    waveLen = abs(np.pi*2/k)
     cProp = ohm/k
 
     #Set up the frame
@@ -94,9 +94,9 @@ def sinePulseAnimation(k,ohm,amp = 1):
 def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01):
     #Obtain physical quanities
     per = 2*np.pi/ohm
-    waveLen = np.pi*2/k
+    waveLen = abs(np.pi*2/k)
     cProp = ohm/k
-    nFrames = int(3*waveLen/(cProp*epsVal*per))
+    nFrames = int(abs(3*waveLen/(cProp*epsVal*per)))
 
     #Set up the frame
     fig, axes = plt.subplots(2,1)
@@ -112,7 +112,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
     axes[0].set_title("x vs y")
 
     #Set up plot 2
-    axes[1].set_xlim(0,3*waveLen/cProp)
+    axes[1].set_xlim(0,3*abs(waveLen/cProp))
     axes[1].set_ylim(-(amp + 0.1*amp),(amp + 0.1*amp))
     axes[1].set_xlabel("t")
     axes[1].set_ylabel("y")
@@ -141,10 +141,11 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
         #Fill the amplitude array
         for i in range(500):
             #Create Pulse
-            if (x[i] >= 0 + cProp*t1 and x[i] <= waveLen + cProp*t1):
-                y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
-            else:
-                continue
+            # if (x[i] >= 0 + cProp*t1 and x[i] <= waveLen + cProp*t1):
+            #     y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
+            # else:
+            #     continue
+            y1[i] = sinePulse(x[i],t1,k,ohm,amp,phase,1)
         
         line1.set_data(x,y1)
         time_text.set_text('t = %.1f' % t1)
@@ -158,10 +159,11 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
             tVal = i*per*epsVal
 
             #Pulse condition
-            if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
-                yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
-            else:
-                yVal = 0
+            # if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
+            #     yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
+            # else:
+            #     yVal = 0
+            yVal = sinePulse(x[249],tVal,k,ohm,amp,phase,1)
             
             t2Arr = np.append(t2Arr,tVal)
             y2Arr = np.append(y2Arr,yVal)
@@ -175,18 +177,18 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
         return line1, line2, time_text
 
     #Animate wave
-    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(3*waveLen/(cProp*epsVal*per)), interval = 80,blit = True)
+    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(abs(3*waveLen/(cProp*epsVal*per))), interval = 80,blit = True)
     plt.show()
     #anim.save("TestAnim.avi",animation.FFMpegWriter(fps=10))
 
 
 #Animate full plane wave
 def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01):
-        #Obtain physical quanities
+    #Obtain physical quanities
     per = 2*np.pi/ohm
-    waveLen = np.pi*2/k
+    waveLen = abs(np.pi*2/k)
     cProp = ohm/k
-    nFrames = int(3*waveLen/(cProp*epsVal*per))
+    nFrames = int(abs(3*waveLen/(cProp*epsVal*per)))
 
     #Set up the frame
     fig, axes = plt.subplots(2,1)
@@ -202,7 +204,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
     axes[0].set_title("x vs y")
 
     #Set up plot 2
-    axes[1].set_xlim(0,3*waveLen/cProp)
+    axes[1].set_xlim(0,abs(3*waveLen/cProp))
     axes[1].set_ylim(-(amp + 0.1*amp),(amp + 0.1*amp))
     axes[1].set_xlabel("t")
     axes[1].set_ylabel("y")
@@ -232,6 +234,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
         for i in range(500):
             #Create Pulse
             y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
+            #print(y[i])
         
         line1.set_data(x,y1)
         time_text.set_text('t = %.1f' % t1)
@@ -262,14 +265,14 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
         return line1, line2, time_text
 
     #Animate wave
-    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(3*waveLen/(cProp*epsVal*per)), interval = 80,blit = True)
+    anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(abs(3*waveLen/(cProp*epsVal*per))), interval = 80,blit = True)
     plt.show()
 
 
 #sineAnimation(1,1)
 #sinePulseAnimation(1,1)
-#pulseTimeAnimation(ohm = 2)
-planeWaveAnimation(ohm = 2)
+pulseTimeAnimation(k = -1, ohm = 2)
+#planeWaveAnimation(k = -1, ohm = 2)
 
 #if __namespace__ == "__main__"
 

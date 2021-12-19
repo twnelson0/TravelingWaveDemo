@@ -17,4 +17,4 @@ Create a static sine wave pulse that is n*lambda in size
 sinePulseStatic = lambda x,t,k,ohm,amp,phase,n : cDirac(x,0,n*(np.pi*2)/k)*amp*np.cos(k*x - ohm*t + phase)
 
 #Create a propogating sine wave pulse that is n*lambda in size
-sinePulse = lambda x,t,k,ohm,amp,phase,n : cDirac(x,(ohm/k)*t,n*(np.pi*2)/k + (ohm/k)*t)*sineWave(x,t,ohm,amp,phase)
+sinePulse = lambda x,t,k,ohm,amp,phase,n : cDirac(x,(ohm/k)*t,n*abs((np.pi*2)/k) + (ohm/k)*t)*sineWave(x,t,k,ohm,amp,phase)
