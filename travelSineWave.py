@@ -91,7 +91,7 @@ def sinePulseAnimation(k,ohm,amp = 1):
 
 
 #Animate pulse and t vs y plot at fixed point
-def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01):
+def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01, nWav = 1):
     #Obtain physical quanities
     per = 2*np.pi/ohm
     waveLen = abs(np.pi*2/k)
@@ -145,7 +145,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
             #     y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
             # else:
             #     continue
-            y1[i] = sinePulse(x[i],t1,k,ohm,amp,phase,1)
+            y1[i] = sinePulse(x[i],t1,k,ohm,amp,phase,nWav)
         
         line1.set_data(x,y1)
         time_text.set_text('t = %.1f' % t1)
@@ -163,7 +163,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
             #     yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
             # else:
             #     yVal = 0
-            yVal = sinePulse(x[249],tVal,k,ohm,amp,phase,1)
+            yVal = sinePulse(x[249],tVal,k,ohm,amp,phase,nWav)
             
             t2Arr = np.append(t2Arr,tVal)
             y2Arr = np.append(y2Arr,yVal)
@@ -179,7 +179,7 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
     #Animate wave
     anim = animation.FuncAnimation(fig,animate,init_func = init, frames = int(abs(3*waveLen/(cProp*epsVal*per))), interval = 80,blit = True)
     plt.show()
-    #anim.save("TestAnim.avi",animation.FFMpegWriter(fps=10))
+    #anim.save("TestAnim.avi",animation.FFMpegWriter(fps=10)) #Save Animation
 
 
 #Animate full plane wave
@@ -271,7 +271,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
 
 #sineAnimation(1,1)
 #sinePulseAnimation(1,1)
-pulseTimeAnimation(k = -1, ohm = 2)
+pulseTimeAnimation(k = 1, ohm = 2, nWav=1)
 #planeWaveAnimation(k = -1, ohm = 2)
 
 #if __namespace__ == "__main__"
