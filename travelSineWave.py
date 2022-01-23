@@ -272,7 +272,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
 #sineAnimation(1,1)
 #sinePulseAnimation(1,1)
 pulseTimeAnimation(k = 1, ohm = 2, nWav=1)
-#planeWaveAnimation(k = -1, ohm = 2)
+#planeWaveAnimation(k = 1, ohm = 2)
 
 #if __namespace__ == "__main__"
 
