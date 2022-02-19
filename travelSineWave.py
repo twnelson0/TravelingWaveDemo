@@ -141,10 +141,6 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01,
         #Fill the amplitude array
         for i in range(500):
             #Create Pulse
-            # if (x[i] >= 0 + cProp*t1 and x[i] <= waveLen + cProp*t1):
-            #     y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
-            # else:
-            #     continue
             y1[i] = sinePulse(x[i],t1,k,ohm,amp,phase,nWav)
         
         line1.set_data(x,y1)
@@ -159,10 +155,6 @@ def pulseTimeAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01,
             tVal = i*per*epsVal
 
             #Pulse condition
-            # if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
-            #     yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
-            # else:
-            #     yVal = 0
             yVal = sinePulse(x[249],tVal,k,ohm,amp,phase,nWav)
             
             t2Arr = np.append(t2Arr,tVal)
@@ -234,7 +226,6 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
         for i in range(500):
             #Create Pulse
             y1[i] = sineWave(x[i],t1,k,ohm,amp,phase)
-            #print(y[i])
         
         line1.set_data(x,y1)
         time_text.set_text('t = %.1f' % t1)
@@ -248,10 +239,7 @@ def planeWaveAnimation(k = 1, ohm = 1, amp = 1, phase = -np.pi/2, epsVal = 0.01)
             tVal = i*per*epsVal
 
             #Pulse condition
-            #if (tVal >= (x[249] - waveLen)/cProp and tVal <= x[249]/cProp):
             yVal = sineWave(x[249],tVal,k,ohm,amp,phase)
-            #else:
-                #yVal = 0
             
             t2Arr = np.append(t2Arr,tVal)
             y2Arr = np.append(y2Arr,yVal)
